@@ -9,10 +9,7 @@ function NewCommentForm({setCommentText, cancelComment, postComment, newCommentT
         <div className="new-comment-form">
             <textarea className="new-comment-textarea" cols="30" rows="10" onChange={updateCommentText} ref={newCommentTextarea} placeholder="Say something..."></textarea>
                 
-            <div className="new-comment-buttons-container">
-                <button className="cancel-comment-button" onClick={cancelComment}>Cancel</button>
-                <button className="post-comment-button" onClick={postComment}>Comment</button>
-            </div>
+            <button className="post-comment-button" onClick={postComment}>Comment</button>
         </div>
     )
 }

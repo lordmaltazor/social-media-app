@@ -14,14 +14,11 @@ function CreatePostModal({setPostText, cancelPost, post}) {
     return (
         <div className="backdrop">
             <div className="create-post-modal">
-                <div className="create-post">
-                    <textarea className="new-post-textarea" cols="30" rows="10" ref={newPostTextarea} onChange={updatePostText} placeholder="Say something..."></textarea>
-                </div>
+                <button className="close" onClick={cancelPost}><i className="fas fa-times"></i></button>
+
+                <textarea className="new-post-textarea" cols="30" rows="10" ref={newPostTextarea} onChange={updatePostText} placeholder="Say something..."></textarea>
                 
-                <div className="buttons-container">
-                    <button className="cancel-post-button" onClick={cancelPost}>Cancel</button>
-                    <button className="post-button" onClick={post}>Post</button>
-                </div>
+                <button className="post-button" onClick={post}>Post</button>
             </div>
         </div>
     )

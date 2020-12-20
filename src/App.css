@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
-:root
-{
+:root {
   --primary-color: rgb(255, 81, 0);
   --light-primary-color: rgb(255, 139, 85);
   --dark-primary-color: rgb(187, 59, 0);
@@ -9,23 +8,24 @@
   --secondary-color: rgb(56, 0, 98);
   --light-secondary-color: rgb(101, 0, 179);
   --dark-secondary-color: rgb(33, 0, 59);
+
+  --button-transition-time: 0.135s;
+  --fade-in-time: 0.25s;
 }
 
-html, body
-{  
+html,
+body {
   margin: 0;
   padding: 0;
 }
 
-body
-{
+body {
   background: var(--dark-secondary-color);
 }
 
 /* SETUP */
 
-.app
-{
+.app {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,16 +36,36 @@ body
   padding: 0;
 }
 
-.login-sign-up-container
-{
+.backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  animation: fade-in var(--fade-in-time);
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* GENERAL */
+
+.login-sign-up-container {
   background: var(--secondary-color);
   width: 50vw;
   height: 75vh;
   border-radius: 50px;
 }
 
-.login-buttons-container
-{
+.login-buttons-container {
   background: rgb(48, 48, 48);
   display: flex;
   justify-content: space-evenly;
@@ -57,8 +77,8 @@ body
   border-radius: 50px 50px 0 0;
 }
 
-.login, .sign-up
-{  
+.login,
+.sign-up {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -69,22 +89,21 @@ body
   animation: slide-in 1s;
 }
 
-.sign-up
-{
+.sign-up {
   display: none;
 }
 
-.login-title, .sign-up-title
-{
+.login-title,
+.sign-up-title {
   color: white;
   margin: 0 0 30px 0;
   font-size: 50px;
   font-weight: 900;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-.login input, .sign-up input
-{
+.login input,
+.sign-up input {
   background: none;
   color: white;
   width: 100%;
@@ -96,38 +115,39 @@ body
   font-size: 20px;
 }
 
-@keyframes slide-in
-{
-  0%
-  {
+@keyframes slide-in {
+  0% {
     transform: translateX(-100px);
     opacity: 0;
   }
 
-  100%
-  {
+  100% {
     transform: translateX(0);
     opacity: 1;
   }
 }
 
-.login input::placeholder, .sign-up input::placeholder
-{
+.login input::placeholder,
+.sign-up input::placeholder {
   color: rgb(143, 143, 143);
   font-style: italic;
 }
 
-.no-account
-{
+.start-login,
+.start-sign-up {
   color: var(--primary-color);
   font-size: 18px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   cursor: pointer;
   transition: color 0.2s;
 }
 
-.submit
-{
+.start-login:hover,
+.start-sign-up:hover {
+  color: var(--light-primary-color);
+}
+
+.submit {
   background: var(--primary-color);
   color: white;
   width: 100%;
@@ -136,33 +156,29 @@ body
   outline: none;
   font-size: 25px;
   font-weight: 700;
-  font-family: 'Roboto', sans-serif;
-  transition: background 0.1s;
+  font-family: "Roboto", sans-serif;
+  transition: background var(--button-transition-time);
 }
 
-.submit:hover
-{
+.submit:hover {
   background: var(--dark-primary-color);
 }
 
-.no-account:hover
-{
+.no-account:hover {
   color: var(--dark-primary-color);
 }
 
-.error-message
-{
+.error-message {
   color: red;
   text-align: center;
   font-size: 25px;
   font-weight: 500;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 /* LOGIN AND SIGN UP PAGE */
 
-.homepage
-{
+.homepage {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -171,10 +187,10 @@ body
   margin: 0;
   padding: 0;
   overflow: hidden scroll;
+  animation: fade-in var(--fade-in-time);
 }
 
-nav
-{
+nav {
   background: rgb(54, 54, 54);
   display: flex;
   justify-content: space-between;
@@ -183,36 +199,41 @@ nav
   height: 100px;
 }
 
-.create-post-button
-{
+.create-post-button,
+.add-friend-button {
   background: var(--primary-color);
   color: white;
-  width: 200px;
+  width: 225px;
   height: 50px;
-  margin: 0 0 0 20px;
+  margin: 0 0 0 30px;
+  padding: 0;
   border: none;
   outline: none;
   font-size: 30px;
   font-weight: 500;
-  font-family: 'Roboto', sans-serif;
-  transition: background 0.2s;
+  font-family: "Roboto", sans-serif;
+  transition: background var(--button-transition-time);
 }
 
-.create-post-button:hover
-{
+.create-post-button:hover,
+.add-friend-button:hover {
   background: var(--dark-primary-color);
 }
 
-.title
-{
+.title {
   color: white;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0;
   font-size: 50px;
   font-weight: 700;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-.profile-info
-{
+.profile-info {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -221,138 +242,104 @@ nav
   margin-right: 20px;
 }
 
-.current-username
-{
+.current-username {
   color: white;
   margin: 0;
   font-size: 25px;
   font-weight: 500;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-.sign-out-button
-{
+.sign-out-button {
   background: var(--primary-color);
   color: white;
-  width: 100px;
-  height: 30px;
+  width: 120px;
+  height: 35px;
   margin: 0;
   padding: 0;
   border: none;
   outline: none;
   font-size: 20px;
   font-weight: 500;
-  font-family: 'Roboto', sans-serif;
-  transition: background 0.2s;
+  font-family: "Roboto", sans-serif;
+  transition: background var(--button-transition-time);
 }
 
-.sign-out-button:hover
-{
+.sign-out-button:hover {
   background: var(--dark-primary-color);
 }
 
 /* HOMEPAGE */
 
-.feed
-{
+.feed {
   background: rgb(32, 32, 32);
   width: 50vw;
 }
 
-.no-posts
-{
+.no-posts {
   color: white;
-  margin: 50px 0 0 0;
+  margin: 25px 10px;
   text-align: center;
   font-size: 30px;
   font-weight: 500;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 /* FEED */
 
-.backdrop
-{
-  background: rgba(0, 0, 0, 0.25);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-}
-
-.create-post-modal
-{
+.create-post-modal {
+  background: rgb(60, 60, 60);
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   width: 60%;
-  height: 60%;
-  margin: 100px auto;
+  height: 40%;
+  margin: 150px auto;
+  padding: 55px 55px 0 55px;
 }
 
-.create-post
-{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  flex: 1;
-}
-
-.new-post-textarea
-{
-  background: rgb(71, 71, 71);
+.new-post-textarea {
+  background: rgba(43, 43, 43, 0.5);
   color: white;
-  min-width: 80%;
-  min-height: 80%;  
-  border: none;
+  width: calc(100% - 20px); /* Left and right padding */
+  margin: 0;
+  padding: 10px;
+  border: 10px solid rgb(43, 43, 43);
   outline: none;
   resize: none;
   font-size: 40px;
-  padding: 10px;
+  flex: 1;
 }
 
-.new-post-textarea::placeholder
-{
+.new-post-textarea::placeholder {
   color: rgb(179, 179, 179);
   font-style: italic;
-} 
-
-.buttons-container
-{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
 }
 
-.cancel-post-button, .post-button
-{
+.post-button {
   background: var(--primary-color);
   color: white;
-  width: 200px;
-  height: 50px;
+  width: 250px;
+  height: 60px;
   margin: 20px auto;
   padding: 0;
   border: none;
   outline: none;
-  font-size: 30px;
+  font-size: 35px;
   font-weight: 500;
-  font-family: 'Roboto', sans-serif;
-  transition: background 0.2s;
+  font-family: "Roboto", sans-serif;
+  transition: background var(--button-transition-time);
 }
 
-.cancel-post-button:hover, .post-button:hover
-{
+.post-button:hover {
   background: var(--dark-primary-color);
 }
 
 /* CREATE POST MODAL */
 
-.post
-{
+.post {
   /*background: rgba(85, 85, 85, 0.5);*/
   background: var(--light-secondary-color);
   color: white;
@@ -362,11 +349,10 @@ nav
   width: calc(100% - 10px);
   margin: 0 0 10px 0;
   padding: 10px 0 0 10px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-.stats-container
-{
+.stats-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -374,8 +360,7 @@ nav
   height: 50px;
 }
 
-.like-button
-{
+.like-button {
   background: none;
   color: red;
   width: 60px;
@@ -383,26 +368,33 @@ nav
   border: none;
   outline: none;
   font-size: 30px;
-  transition: 0.2s;
+  transition: var(--button-transition-time);
 }
 
-.like-button:hover
-{
+.like-button:hover {
   color: rgb(255, 73, 73);
   font-size: 35px;
 }
 
-@keyframes shake
-{
-  0% { transform: rotate(10deg); }
-  25% { transform: rotate(-10deg); }
-  50% { transform: rotate(20deg); }
-  75% { transform: rotate(-5deg); }
-  100% { transform: rotate(0deg); }
+@keyframes shake {
+  0% {
+    transform: rotate(10deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(20deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
-.comments-button
-{
+.comments-button {
   background: none;
   color: gray;
   width: 60px;
@@ -411,28 +403,24 @@ nav
   outline: none;
   font-size: 30px;
   opacity: 0.75;
-  transition: 0.2s;
+  transition: var(--button-transition-time);
 }
 
-.comments-button:hover
-{
+.comments-button:hover {
   color: rgb(165, 165, 165);
   opacity: 1;
 }
 
-.shake
-{
+.shake {
   animation: shake 1s;
 }
 
-.likes
-{
+.likes {
   margin: 0;
   padding: 0;
 }
 
-.post-container
-{
+.post-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -442,15 +430,30 @@ nav
   overflow-wrap: break-word;
 }
 
-.post-sender
-{
+.post-sender {
   margin: 0;
   padding: 0;
   font-size: 20px;
 }
 
-.post-text
-{
+.add-as-friend-button {
+  background: var(--primary-color);
+  color: white;
+  margin: 0 0 0 10px;
+  padding: 4px 8px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  transition: background var(--button-transition-time);
+}
+
+.add-as-friend-button:hover {
+  background: var(--dark-primary-color);
+}
+
+.post-text {
   margin: 0;
   padding: 0;
   font-size: 30px;
@@ -458,80 +461,47 @@ nav
 
 /* POST */
 
-.new-comment-form
-{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.new-comment-textarea
-{
-  background: rgb(71, 71, 71);
-  color: white;
-  width: calc(100% - 20px); /* Padding */
-  height: 200px;
-  border: none;
-  outline: none;
-  resize: none;
-  font-size: 40px;
-  padding: 10px;
-}
-
-.new-comment-textarea::placeholder
-{
-  color: rgb(179, 179, 179);
-  font-style: italic;
-} 
-
-.new-comment-buttons-container
-{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  height: 100px;
-}
-
-.cancel-comment-button, .post-comment-button
-{
-  background: var(--primary-color);
-  color: white;
-  width: 200px;
-  height: 50px;
-  margin: 20px auto;
-  padding: 0;
-  border: none;
-  outline: none;
-  font-size: 30px;
-  font-weight: 500;
-  font-family: 'Roboto', sans-serif;
-  transition: background 0.2s;
-}
-
-.cancel-comment-button:hover, .post-comment-button:hover
-{
-  background: var(--dark-primary-color);
-}
-
-/* NEW COMMENT FORM */
-
-/* The CommentModal's backdrop is controlled by the '.backdrop' selector */
-.comments-modal
-{
-  background: rgb(10, 10, 10);
+/* The backdrop is controlled by the '.backdrop' selector */
+.comments-modal {
+  background: rgb(60, 60, 60);
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 60%;
   max-height: 85vh;
   margin: 50px auto;
-  padding: 15px 15px 5px 15px;
+  padding: 60px 60px 5px 60px;
 }
 
-.comments
-{
+.close {
+  background: none;
+  color: rgb(190, 190, 190);
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  border: none;
+  outline: none;
+  font-size: 25px;
+  font-weight: 900;
+  transition: background var(--button-transition-time);
+}
+
+.close:hover {
+  background: rgba(150, 150, 150, 0.5);
+}
+
+.close i {
+  transition: transform 0.35s;
+}
+
+.close:hover i {
+  transform: rotateZ(90deg);
+}
+
+.comments {
   height: 100%;
   overflow: scroll;
 }
@@ -540,31 +510,18 @@ nav
   display: none;
 }
 
-.no-comments
-{
-  color: white;
-  margin: 50px 0 0 0;
-  text-align: center;
-  font-size: 30px;
-  font-weight: 500;
-  font-family: 'Roboto', sans-serif;
-}
-
-.comment
-{
-  /*background: rgba(85, 85, 85, 0.5);*/
-  background: var(--light-secondary-color);
+.comment {
+  background: var(--secondary-color);
   color: white;
   display: flex;
   align-items: center;
   width: 100%;
   margin: 0 0 10px 0;
   padding: 10px 0 0 10px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-.comment-container
-{
+.comment-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -574,18 +531,194 @@ nav
   overflow-wrap: break-word;
 }
 
-.comment-sender
-{
+.comment-sender {
   margin: 0;
   padding: 0;
   font-size: 20px;
 }
 
-.comment-text
-{
+.comment-text {
   margin: 0;
   padding: 0;
   font-size: 30px;
 }
 
 /* COMMENTS */
+
+.new-comment-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.new-comment-textarea {
+  background: rgba(43, 43, 43, 0.5);
+  color: white;
+  width: calc(100% - 40px); /* Padding and borders */
+  height: 200px;
+  margin: 10px 0 0 0;
+  padding: 0 10px;
+  border: 10px solid rgb(43, 43, 43);
+  outline: none;
+  resize: none;
+  font-size: 40px;
+}
+
+.new-comment-textarea::placeholder {
+  color: rgb(179, 179, 179);
+  font-style: italic;
+}
+
+.post-comment-button {
+  background: var(--primary-color);
+  color: white;
+  width: 200px;
+  height: 50px;
+  margin: 20px 0 15px 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  font-size: 30px;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  transition: background var(--button-transition-time);
+}
+
+.post-comment-button:hover {
+  background: var(--dark-primary-color);
+}
+
+/* NEW COMMENT FORM */
+
+/* The backdrop is controlled by the '.backdrop' selector */
+.search-for-user-modal {
+  background: rgb(60, 60, 60);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  max-height: 85vh;
+  margin: 50px auto;
+  padding: 50px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotateZ(0);
+  }
+
+  100% {
+    transform: rotateZ(360);
+  }
+}
+
+.search-for-user-form {
+  display: flex;
+  width: 100%;
+  height: 45px;
+  margin: 0;
+  padding: 0;
+}
+
+.search-for-user-input {
+  background: rgb(255, 255, 255);
+  min-width: 0;
+  font-size: 20px;
+  margin: 0;
+  padding: 0 0 0 7px;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  flex: 1;
+}
+
+.search-for-user-input::placeholder {
+  font-style: italic;
+}
+
+.search-for-user-button {
+  background: var(--primary-color);
+  color: white;
+  width: 165px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  font-size: 30px;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  transition: background var(--button-transition-time);
+}
+
+.search-for-user-button:hover {
+  background: var(--dark-primary-color);
+}
+
+.found-user {
+  background: rgba(128, 128, 128, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  margin: 25px 0 0 0;
+}
+
+.found-user-name {
+  color: white;
+  margin: 0 20px 0 0;
+  font-size: 25px;
+  font-family: "Roboto", sans-serif;
+}
+
+.add-as-friend-button,
+.unfriend-button {
+  background: var(--primary-color);
+  color: white;
+  height: 40px;
+  margin: 0;
+  padding: 0 20px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  transition: background var(--button-transition-time);
+}
+
+.add-as-friend-button:hover,
+.unfriend-button:hover {
+  background: var(--dark-primary-color);
+}
+
+.no-users-found {
+  color: white;
+  margin: 40px 0 0 0;
+  font-size: 25px;
+  font-family: "Roboto", sans-serif;
+}
+
+.close-user-search-button {
+  background: var(--primary-color);
+  color: white;
+  width: 150px;
+  height: 50px;
+  margin: 20px 0 0 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  font-size: 30px;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  transition: background var(--button-transition-time);
+}
+
+.close-user-search-button:hover {
+  background: var(--dark-primary-color);
+}
+
+/* SEARCH FOR FRIEND MODAL */

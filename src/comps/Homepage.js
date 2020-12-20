@@ -4,10 +4,12 @@ import {firestore} from '../firebaseConfig';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import CreatePostModal from './CreatePostModal';
 import Feed from './Feed';
+import SearchForUserModal from './SearchForUserModal';
 
-function Homepage({username, setHasLoggedIn}) {
+function Homepage({user, setHasLoggedIn, users, usersRef}) {
     const [creatingPost, setCreatingPost] = useState(false);
     const [creatingComment, setCreatingComment] = useState(false);
+    const [addingFriend, setAddingFriend] = useState(false);
 
     const [postText, setPostText] = useState('');
 
@@ -15,11 +17,45 @@ function Homepage({username, setHasLoggedIn}) {
     const query = postsRef.orderBy('createdAt', "desc"); 
     const [posts] = useCollectionData(query, {idField: 'id'});
 
+    const friendsRef = usersRef.doc(user.id).collection('friends');
+    const [friends] = useCollectionData(friendsRef, {idField: 'id'});
+
+    const getFriendsPost = () => {
+        if (friends == null)
+        {
+            return;
+        }
+        
+        let friendsPosts = [];
+
+        let friendsNames = [];
+        for (let i = 0; i < friends.length; i++)
+        {
+            friendsNames[i] = friends[i].username;
+        }
+    
+        for (let i = 0; i < posts.length; i++)
+        {
+            if (friendsNames.includes(posts[i].sender))
+            {
+                friendsPosts.push(posts[i]);
+            }
+        }
+
+        //console.log(friendsPosts);
+
+        return friendsPosts;
+    }
+
+    getFriendsPost();
+
     const signOut = () => {
         setHasLoggedIn(false);
     }
 
     const createPost = () => {
+        setPostText('');
+        
         setCreatingPost(true);
     }
 
@@ -40,7 +76,7 @@ function Homepage({username, setHasLoggedIn}) {
         await postsRef.add({
             text: postText,
             likedBy: [],
-            sender: username,
+            sender: user.username,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         })
     }
@@ -48,19 +84,24 @@ function Homepage({username, setHasLoggedIn}) {
     return (
         <div className="homepage">
             <nav>
-                <button className="create-post-button" onClick={createPost}>Create Post</button>
+                <div className="buttons-container">
+                    <button className="create-post-button" onClick={createPost}>Create Post</button>
+                    <button className="add-friend-button" onClick={() => setAddingFriend(true)}>Add Friend</button>
+                </div>
 
                 <h1 className="title">Social Media App</h1>
 
                 <div className="profile-info">
-                    <p className="current-username">{username}</p>
+                    <p className="current-username">{user.username}</p>
                     <button className="sign-out-button" onClick={signOut}>Sign Out</button>
                 </div>
             </nav>
 
-            <Feed posts={posts} postsRef={postsRef} username={username} creatingComment={creatingComment} setCreatingComment={setCreatingComment}/>
+            <Feed getFriendsPost={getFriendsPost} postsRef={postsRef} username={user.username} creatingComment={creatingComment} setCreatingComment={setCreatingComment}/>
 
             {creatingPost && <CreatePostModal setPostText={setPostText} cancelPost={cancelPost} post={post}/>}
+
+            {addingFriend && <SearchForUserModal user={user} users={users} usersRef={usersRef} friends={friends} friendsRef={friendsRef} setAddingFriend={setAddingFriend}/>}
         </div>
     )
 }
