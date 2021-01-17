@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import './App.css';
-import {firestore} from './firebaseConfig';
+import { firestore } from './firebaseConfig';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import LoginForm from './comps/LoginForm.js';
 import Homepage from './comps/Homepage';
 
-function App() {  
-    const usersRef = firestore.collection('users');    
-    const [users] = useCollectionData(usersRef, {idField: 'id'});
-  
-    const [isLoggingIn, setIsLoggingIn] = useState(true);
+function App() {
+    const usersRef = firestore.collection('users');
+    const [users] = useCollectionData(usersRef, { idField: 'id' });
+
     const [hasLoggedIn, setHasLoggedIn] = useState(false);
 
     const [username, setUsername] = useState('');
@@ -17,10 +16,8 @@ function App() {
     const [repeatedPassword, setRepeatedPassword] = useState('');
 
     const getUser = (query) => {
-        for (let i = 0; i < users.length; i++)
-        {
-            if (users[i].username === query)
-            {
+        for (let i = 0; i < users.length; i++) {
+            if (users[i].username === query) {
                 return users[i];
             }
         }
@@ -28,10 +25,9 @@ function App() {
 
     const userExists = (query) => {
         let exists = false;
-        
+
         users.map(usr => {
-            if (usr.username === query)
-            {
+            if (usr.username === query) {
                 exists = true;
             }
         });
@@ -41,7 +37,7 @@ function App() {
 
     return (
         <div className="app">
-            {hasLoggedIn ? <Homepage user={getUser(username)} setHasLoggedIn={setHasLoggedIn} users={users} usersRef={usersRef}/> : <LoginForm usersRef={usersRef} username={username} password={password} repeatedPassword={repeatedPassword} setUsername={setUsername} setPassword={setPassword} setRepeatedPassword={setRepeatedPassword} getUser={getUser} userExists={userExists} isLoggingIn={isLoggingIn} setIsLoggingIn={setIsLoggingIn} setHasLoggedIn={setHasLoggedIn}/>}
+            {hasLoggedIn ? <Homepage user={getUser(username)} setHasLoggedIn={setHasLoggedIn} users={users} usersRef={usersRef} /> : <LoginForm usersRef={usersRef} username={username} password={password} repeatedPassword={repeatedPassword} setUsername={setUsername} setPassword={setPassword} setRepeatedPassword={setRepeatedPassword} getUser={getUser} userExists={userExists} setHasLoggedIn={setHasLoggedIn} />}
         </div>
     );
 }
